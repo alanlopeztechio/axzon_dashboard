@@ -24,3 +24,36 @@ body {
   color: var(--foreground);
   font-family: var(--font-montserrat), Arial, Helvetica, sans-serif;
 }
+
+.gm-style-iw-c {
+  padding: 0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6) !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+.gm-style-iw-d {
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+/* La flecha de abajo */
+.gm-style-iw-t::after {
+  display: none !important;
+}
+
+/* Botón X nativo */
+.gm-style-iw-chr {
+  display: none !important;
+}
+
+/* Fondo blanco exterior */
+.gm-style-iw-tc {
+  display: none !important;
+}
+
+/* Este es el que causa el borde blanco que ves */
+.gm-style .gm-style-iw-c {
+  background-color: transparent !important;
+}

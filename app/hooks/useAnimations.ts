@@ -1,9 +1,6 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { animate } from 'popmotion';
 
-/**
- * Hook para manejar el tiempo de animación con requestAnimationFrame
- */
 export function useAnimationTime() {
   const [time, setTime] = useState(0);
 
@@ -23,9 +20,6 @@ export function useAnimationTime() {
   return time;
 }
 
-/**
- * Hook para manejar rotación continua
- */
 export function useRotation(duration: number = 3000) {
   const [rotation, setRotation] = useState(0);
 
@@ -45,15 +39,11 @@ export function useRotation(duration: number = 3000) {
   return rotation;
 }
 
-/**
- * Hook para manejar escala con animación spring al hacer hover
- */
 export function useHoverScale(isHovered: boolean) {
   const [scale, setScale] = useState(1);
   const animationRef = useRef<{ stop: () => void } | null>(null);
 
   useEffect(() => {
-    // Detener animación anterior si existe
     animationRef.current?.stop();
 
     animationRef.current = animate({
@@ -68,14 +58,11 @@ export function useHoverScale(isHovered: boolean) {
     return () => {
       animationRef.current?.stop();
     };
-  }, [isHovered]); // Solo depende de isHovered, no de scale
+  }, [isHovered]);
 
   return scale;
 }
 
-/**
- * Hook combinado para todas las animaciones del mapa
- */
 export function useMapAnimations(hoveredId: string | null) {
   const time = useAnimationTime();
   const rotation = useRotation();

@@ -41,14 +41,7 @@ export function useSimulationData(options: UseSimulationDataOptions = {}) {
         );
         setData(payload);
         setError(null);
-
-        // Pequeño delay para mostrar el mensaje de renderizado
-        setTimeout(() => {
-          if (!cancelled) {
-            onLoadingChange?.(false);
-            setIsLoading(false);
-          }
-        }, 500);
+        onLoadingChange?.(false);
       } catch (err) {
         if (cancelled) return;
 
