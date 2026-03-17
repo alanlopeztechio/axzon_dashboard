@@ -11,8 +11,9 @@ import {
   RoutesList,
   SearchBar,
   Timeline,
-} from './components';
-import { useSimulationData } from './hooks';
+  UserMenu,
+} from '../components';
+import { useSimulationData } from '../hooks';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -104,6 +105,9 @@ export default function Home() {
 
           {/* Timeline */}
           {/* <Timeline lastUpdate={lastUpdate ?? undefined} /> */}
+
+          {/* User menu */}
+          <UserMenu />
         </div>
       </main>
 

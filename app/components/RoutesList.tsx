@@ -67,7 +67,7 @@ export function RoutesList({
       {/* Header */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="w-full flex items-center justify-between px-4 py-3 border-b border-zinc-800 hover:bg-zinc-800/50 transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3 border-b border-zinc-800 hover:bg-zinc-800/50 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-2">
           <MapPin className="w-4 h-4 text-blue-400" />

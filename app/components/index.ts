@@ -6,3 +6,4 @@ export * from './MapControls';
 export * from './RoutesList';
 export * from './SearchBar';
 export * from './Timeline';
+export * from './UserMenu';
