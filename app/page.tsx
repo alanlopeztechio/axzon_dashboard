@@ -194,19 +194,19 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top_left,#102449_0%,#060c1e_36%,#030711_100%)] text-white">
-      <DashboardSidebar
+      {/* <DashboardSidebar
         mobileOpen={mobileSidebarOpen}
         onClose={() => setMobileSidebarOpen(false)}
-      />
+      /> */}
 
-      <main className="lg:pl-72">
-        <div className="mx-auto max-w-450 px-4 py-4 sm:px-6 lg:px-8">
-          <DashboardTopbar
+      <main>
+        <div className="px-4 w-full py-4 sm:px-6 lg:px-8 grid grid-cols-6 grid-rows-4 gap-2">
+          {/* <DashboardTopbar
             validatedPct={analytics.validatedPct}
             anomalousPct={analytics.anomalyPct}
             lastUpdate={lastUpdate ?? analytics.latestTimestamp}
             onMenuClick={() => setMobileSidebarOpen(true)}
-          />
+          /> */}
 
           <MetricsGrid
             items={[
@@ -216,7 +216,7 @@ export default function Home() {
                 helper: `${simulationData.routes.length.toLocaleString()} routes reporting`,
                 badge: 'Live devices',
                 accent: 'cyan',
-                icon: <Radar className="h-5 w-5" />,
+                icon: <Radar className="h-5 w-5 text-[#B50404]" />,
               },
               {
                 label: 'Average temperature',
@@ -248,7 +248,15 @@ export default function Home() {
             ]}
           />
 
-          <div className="mt-5 grid gap-4 xl:grid-cols-[1.3fr_0.9fr]">
+          <div className="col-span-4 row-span-2 col-start-3">
+            {/* <FleetHealthTrendCard points={analytics.fleetHealthTrend} /> */}
+            <FleetMapPanel
+              points={simulationData.points}
+              routes={simulationData.routes}
+            />
+          </div>
+
+          <div className="col-span-4 row-span-2 col-start-3 row-start-3">
             <SystemHealthCard
               totalReadings={analytics.totalReadings}
               validatedReadings={analytics.validatedReadings}
@@ -256,15 +264,7 @@ export default function Home() {
               avgTemp={analytics.avgTemp}
               impactedRoutes={analytics.impactedRoutes}
             />
-            <AnomalyFeedCard items={analytics.anomalyFeed} />
-          </div>
-
-          <div className="mt-5 grid gap-4 xl:grid-cols-[1.05fr_1.15fr]">
-            <FleetHealthTrendCard points={analytics.fleetHealthTrend} />
-            <FleetMapPanel
-              points={simulationData.points}
-              routes={simulationData.routes}
-            />
+            {/* <AnomalyFeedCard items={analytics.anomalyFeed} /> */}
           </div>
 
           {/* <div className="mt-5 grid gap-4 xl:grid-cols-[0.9fr_1.1fr]">

@@ -2,12 +2,13 @@
 
 import { useMemo, useState } from 'react';
 import { APIProvider, InfoWindow, Map } from '@vis.gl/react-google-maps';
-import { Gauge, MapPinned, Thermometer } from 'lucide-react';
+import { Gauge, MapPinned, Thermometer, Truck } from 'lucide-react';
 import DeckGlOverlay from '../DeckGlOverlay';
 import { getIconUbicationLayer } from '../../layers/IconUbicationLayer';
 import { getRouterLayer } from '../../layers/RouterLayer';
 import type { SensorPoint, SensorRoute } from '../../types';
 import { DashboardCard } from './DashboardCard';
+import { FaTruck } from 'react-icons/fa';
 
 interface FleetMapPanelProps {
   points: SensorPoint[];
@@ -68,7 +69,7 @@ export function FleetMapPanel({ points, routes }: FleetMapPanelProps) {
           {routes.length} routes · {points.length.toLocaleString()} readings
         </div>
       }
-      className="h-full"
+      className="h-full w-full"
     >
       <div className="relative overflow-hidden rounded-[26px] border border-white/8 bg-slate-950">
         <div className="absolute inset-x-0 top-0 z-10 flex items-center justify-between gap-3 px-4 py-3">
@@ -151,7 +152,44 @@ export function FleetMapPanel({ points, routes }: FleetMapPanelProps) {
                   </div>
                 </InfoWindow>
               ) : null}
+              <div className="z-20 h-full bg-[#1580EB] absolute top-5 rounded-2xl left-0 flex items-start  justify-center text-sm text-slate-400 pointer-events-none px-4 py-6">
+                <div className="px-5 py-4 bg-white rounded-2xl shadow-lg pointer-events-auto">
+                  <div className="flex flex-col gap-4 items-start">
+                    <div className="flex flex-row gap-4 items-center">
+                      <div className="bg-[#FFF5CF] text-[#FDB648] w-8 h-8  items-center justify-center flex rounded-xl">
+                        <FaTruck className=" " />
+                      </div>
+                      <div className="space-y-1 flex flex-col">
+                        <div>
+                          <p className="text-md font-bold text-black">
+                            Company : A
+                          </p>
+                          <p>Fleet : 1</p>
+                        </div>
+                      </div>
+                    </div>
 
+                    <div className="ml-2 grid grid-cols-[20px_1fr] gap-x-3 gap-y-1 text-xs text-slate-600">
+                      <div className="relative row-span-4 flex justify-center">
+                        {/* línea */}
+                        <span className="absolute top-1 bottom-1 w-[2px] rounded-full bg-slate-300" />
+                        {/* punto origen */}
+                        <span className="absolute top-1 h-2.5 w-2.5 rounded-full bg-blue-600 ring-2 ring-white" />
+                        {/* punto intermedio (posición actual) */}
+                        <span className="absolute top-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-blue-400 ring-2 ring-white" />
+                        {/* punto destino */}
+                        <span className="absolute bottom-1 h-2.5 w-2.5 rounded-full bg-slate-400 ring-2 ring-white" />
+                      </div>
+
+                      <p className="text-slate-500">From:</p>
+                      <p className="font-semibold text-slate-900">San Diego</p>
+
+                      <p className="text-slate-500">To:</p>
+                      <p className="font-semibold text-slate-900">New York</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <DeckGlOverlay layers={[routeLayers, iconLayers]} />
             </Map>
           </APIProvider>

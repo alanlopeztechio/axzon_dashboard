@@ -46,7 +46,6 @@ type SimulationResponse = {
 async function readSimulationLogs(): Promise<SimulationResponse> {
   const simulationDir = path.resolve(process.cwd(), 'simulation_outputs');
 
-  // Verificar que el directorio existe
   try {
     await fs.access(simulationDir);
   } catch {
