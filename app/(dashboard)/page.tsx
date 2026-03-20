@@ -2,18 +2,15 @@
 
 import { useState, useCallback, useMemo } from 'react';
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
+
+import { useSimulationData } from '@/hooks';
 import {
   DeckGlOverlay,
   LoadingOverlay,
-  Sidebar,
-  StatsPanel,
-  MapControls,
   RoutesList,
-  SearchBar,
-  Timeline,
+  StatsPanel,
   UserMenu,
-} from '../components';
-import { useSimulationData } from '../hooks';
+} from '@/components';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
