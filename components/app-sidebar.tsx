@@ -194,62 +194,66 @@ export function AppSidebar({
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {data.navMain.map((item) => (
-          <SidebarGroup key={item.title}>
-            <SidebarMenu>
-              <Collapsible defaultOpen className="group/collapsible">
-                <SidebarMenuItem>
-                  <SidebarMenuButton asChild>
-                    <p className="text-[10px] font-semibold text-[#555] uppercase tracking-widest px-2 py-2">
-                      {item.title}
-                    </p>
-                  </SidebarMenuButton>
-                  <CollapsibleTrigger asChild>
-                    <SidebarMenuAction className="data-[state=open]:rotate-90">
-                      <ChevronRight />
-                      <span className="sr-only">Toggle</span>
-                    </SidebarMenuAction>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      {item.items.map((subItem) => {
-                        const isActive = pathname === subItem.url;
-                        const Icon = subItem.icon;
-                        return (
-                          <SidebarMenuSubItem key={subItem.title}>
-                            <SidebarMenuSubButton
-                              asChild
-                              isActive={isActive}
-                              className={cn(
-                                'h-9 rounded-lg border border-transparent px-3 text-sm font-medium tracking-tight transition-all',
-                                'text-[#666] hover:bg-[#1a1a1a] hover:text-[#ccc]',
-                                'data-[active=true]:bg-[#1a0a09] data-[active=true]:text-white data-[active=true]:border-[#c0392b55]',
-                              )}
-                            >
-                              <a href={subItem.url}>
-                                {Icon && (
-                                  <Icon
-                                    className={cn(
-                                      'size-4 transition-colors',
-                                      isActive
-                                        ? 'text-[#e74c3c]'
-                                        : 'text-[#666]',
-                                    )}
-                                  />
+        {data.navMain.map((item) => {
+          const groupId = `sidebar-${item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+
+          return (
+            <SidebarGroup key={item.title}>
+              <SidebarMenu>
+                <Collapsible defaultOpen className="group/collapsible">
+                  <SidebarMenuItem>
+                    <SidebarMenuButton asChild>
+                      <p className="text-[10px] font-semibold text-[#555] uppercase tracking-widest px-2 py-2">
+                        {item.title}
+                      </p>
+                    </SidebarMenuButton>
+                    <CollapsibleTrigger
+                      asChild
+                      aria-controls={`${groupId}-content`}
+                    >
+                      <SidebarMenuAction className="data-[state=open]:rotate-90">
+                        <ChevronRight />
+                        <span className="sr-only">Toggle</span>
+                      </SidebarMenuAction>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent id={`${groupId}-content`}>
+                      <SidebarMenuSub>
+                        {item.items.map((subItem) => {
+                          const isActive =
+                            subItem.url === '/'
+                              ? pathname === '/'
+                              : pathname === subItem.url ||
+                                pathname.startsWith(`${subItem.url}/`);
+                          const Icon = subItem.icon;
+                          return (
+                            <SidebarMenuSubItem key={subItem.title}>
+                              <SidebarMenuSubButton
+                                asChild
+                                isActive={isActive}
+                                className={cn(
+                                  'h-9 rounded-lg border border-transparent px-3 text-sm font-medium tracking-tight transition-all',
+                                  'text-[#666] hover:bg-[#1a1a1a] hover:text-[#ccc] [&>svg]:text-[#666] hover:[&>svg]:text-[#ccc]',
+                                  'data-[active=true]:bg-[#1a0a09] data-[active=true]:text-white data-[active=true]:border-[#c0392b55] data-[active=true]:[&>svg]:text-[#e74c3c]!',
                                 )}
-                                <span>{subItem.title}</span>
-                              </a>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        );
-                      })}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
-                </SidebarMenuItem>
-              </Collapsible>
-            </SidebarMenu>
-          </SidebarGroup>
-        ))}
+                              >
+                                <a href={subItem.url}>
+                                  {Icon && (
+                                    <Icon className="size-4 transition-colors" />
+                                  )}
+                                  <span>{subItem.title}</span>
+                                </a>
+                              </SidebarMenuSubButton>
+                            </SidebarMenuSubItem>
+                          );
+                        })}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  </SidebarMenuItem>
+                </Collapsible>
+              </SidebarMenu>
+            </SidebarGroup>
+          );
+        })}
       </SidebarContent>
       <SidebarFooter>
         <UserMenu />

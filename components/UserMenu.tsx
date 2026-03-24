@@ -49,7 +49,7 @@ export function UserMenu() {
       <SidebarMenu>
         <SidebarMenuItem>
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+            <DropdownMenuTrigger asChild id="user-menu-trigger">
               <SidebarMenuButton
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
@@ -70,6 +70,8 @@ export function UserMenu() {
               </SidebarMenuButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent
+              id="user-menu-content"
+              aria-labelledby="user-menu-trigger"
               className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
               align="end"
               sideOffset={4}
