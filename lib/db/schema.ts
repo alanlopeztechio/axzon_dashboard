@@ -55,23 +55,32 @@ export const simulationRuns = pgTable('simulation_runs', {
   tid: text('tid').notNull(),
   reeferId: uuid('reefer_id'),
   sectionId: integer('section_id'),
-  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 // ─── Raw JSON (JSON completo sin procesar) ───
 
 export const simulationRawData = pgTable('simulation_raw_data', {
   id: uuid('id').defaultRandom().primaryKey(),
-  simulationRunId: uuid('simulation_run_id').references(() => simulationRuns.id, { onDelete: 'cascade' }).notNull().unique(),
+  simulationRunId: uuid('simulation_run_id')
+    .references(() => simulationRuns.id, { onDelete: 'cascade' })
+    .notNull()
+    .unique(),
   raw: jsonb('raw').notNull(),
-  uploadedAt: timestamp('uploaded_at', { withTimezone: true }).defaultNow().notNull(),
+  uploadedAt: timestamp('uploaded_at', { withTimezone: true })
+    .defaultNow()
+    .notNull(),
 });
 
 // ─── Route Metadata ───
 
 export const routeMetadata = pgTable('route_metadata', {
   id: uuid('id').defaultRandom().primaryKey(),
-  simulationRunId: uuid('simulation_run_id').references(() => simulationRuns.id, { onDelete: 'cascade' }).notNull(),
+  simulationRunId: uuid('simulation_run_id')
+    .references(() => simulationRuns.id, { onDelete: 'cascade' })
+    .notNull(),
   routeName: text('route_name').notNull(),
   routeId: integer('route_id'),
   companyId: text('company_id'),
@@ -85,14 +94,20 @@ export const routeMetadata = pgTable('route_metadata', {
 
 export const tagConfigurations = pgTable('tag_configurations', {
   id: uuid('id').defaultRandom().primaryKey(),
-  simulationRunId: uuid('simulation_run_id').references(() => simulationRuns.id, { onDelete: 'cascade' }).notNull(),
+  simulationRunId: uuid('simulation_run_id')
+    .references(() => simulationRuns.id, { onDelete: 'cascade' })
+    .notNull(),
   logIntervalInSeconds: integer('log_interval_in_seconds'),
   logDelayedStartInSamples: integer('log_delayed_start_in_samples'),
   logNumberOfSamples: integer('log_number_of_samples'),
   temperatureLowerLimit: real('temperature_lower_limit'),
-  temperatureLowerLimitAlarmDelay: integer('temperature_lower_limit_alarm_delay'),
+  temperatureLowerLimitAlarmDelay: integer(
+    'temperature_lower_limit_alarm_delay',
+  ),
   temperatureUpperLimit: real('temperature_upper_limit'),
-  temperatureUpperLimitAlarmDelay: integer('temperature_upper_limit_alarm_delay'),
+  temperatureUpperLimitAlarmDelay: integer(
+    'temperature_upper_limit_alarm_delay',
+  ),
   ledEnabled: boolean('led_enabled'),
   ledMode: ledModeEnum('led_mode'),
   ledOffTimeInSeconds: integer('led_off_time_in_seconds'),
@@ -107,19 +122,25 @@ export const tagConfigurations = pgTable('tag_configurations', {
 
 export const armingRecords = pgTable('arming_records', {
   id: uuid('id').defaultRandom().primaryKey(),
-  simulationRunId: uuid('simulation_run_id').references(() => simulationRuns.id, { onDelete: 'cascade' }).notNull(),
+  simulationRunId: uuid('simulation_run_id')
+    .references(() => simulationRuns.id, { onDelete: 'cascade' })
+    .notNull(),
   armStatus: armStatusEnum('arm_status'),
   armErrorNumber: integer('arm_error_number'),
   armErrorMessage: text('arm_error_message'),
   armTimestamp: timestamp('arm_timestamp', { withTimezone: true }),
-  armFingerSpotTimestamp: timestamp('arm_finger_spot_timestamp', { withTimezone: true }),
+  armFingerSpotTimestamp: timestamp('arm_finger_spot_timestamp', {
+    withTimezone: true,
+  }),
 });
 
 // ─── Alarms ───
 
 export const alarmRecords = pgTable('alarm_records', {
   id: uuid('id').defaultRandom().primaryKey(),
-  simulationRunId: uuid('simulation_run_id').references(() => simulationRuns.id, { onDelete: 'cascade' }).notNull(),
+  simulationRunId: uuid('simulation_run_id')
+    .references(() => simulationRuns.id, { onDelete: 'cascade' })
+    .notNull(),
   alarmAny: boolean('alarm_any').default(false),
   alarmTemperature: boolean('alarm_temperature').default(false),
   alarmLowTemperature: boolean('alarm_low_temperature').default(false),
@@ -127,18 +148,28 @@ export const alarmRecords = pgTable('alarm_records', {
   alarmTamper: boolean('alarm_tamper').default(false),
   alarmLowBattery: boolean('alarm_low_battery').default(false),
   alarmInitialBattery: boolean('alarm_initial_battery').default(false),
-  alarmTemperatureTimestamp: timestamp('alarm_temperature_timestamp', { withTimezone: true }),
+  alarmTemperatureTimestamp: timestamp('alarm_temperature_timestamp', {
+    withTimezone: true,
+  }),
   alarmTemperatureValue: real('alarm_temperature_value'),
-  alarmTamperTimestamp: timestamp('alarm_tamper_timestamp', { withTimezone: true }),
-  alarmBatteryTimestamp: timestamp('alarm_battery_timestamp', { withTimezone: true }),
+  alarmTamperTimestamp: timestamp('alarm_tamper_timestamp', {
+    withTimezone: true,
+  }),
+  alarmBatteryTimestamp: timestamp('alarm_battery_timestamp', {
+    withTimezone: true,
+  }),
 });
 
 // ─── Inventories (reader scans) ───
 
 export const inventories = pgTable('inventories', {
   id: uuid('id').defaultRandom().primaryKey(),
-  simulationRunId: uuid('simulation_run_id').references(() => simulationRuns.id, { onDelete: 'cascade' }).notNull(),
-  readerTimestamp: timestamp('reader_timestamp', { withTimezone: true }).notNull(),
+  simulationRunId: uuid('simulation_run_id')
+    .references(() => simulationRuns.id, { onDelete: 'cascade' })
+    .notNull(),
+  readerTimestamp: timestamp('reader_timestamp', {
+    withTimezone: true,
+  }).notNull(),
   readerHost: text('reader_host'),
   readerMac: text('reader_mac'),
   readerLatitude: doublePrecision('reader_latitude'),
@@ -165,7 +196,9 @@ export const inventories = pgTable('inventories', {
 
 export const loggedData = pgTable('logged_data', {
   id: uuid('id').defaultRandom().primaryKey(),
-  simulationRunId: uuid('simulation_run_id').references(() => simulationRuns.id, { onDelete: 'cascade' }).notNull(),
+  simulationRunId: uuid('simulation_run_id')
+    .references(() => simulationRuns.id, { onDelete: 'cascade' })
+    .notNull(),
   timestamp: timestamp('timestamp', { withTimezone: true }).notNull(),
   tempInC: real('temp_in_c'),
   tamper: boolean('tamper').default(false),
@@ -176,22 +209,28 @@ export const loggedData = pgTable('logged_data', {
 
 // ─── Relations ───
 
-export const simulationRunsRelations = relations(simulationRuns, ({ one, many }) => ({
-  rawData: one(simulationRawData),
-  routeMetadata: one(routeMetadata),
-  tagConfiguration: one(tagConfigurations),
-  arming: one(armingRecords),
-  alarms: one(alarmRecords),
-  inventories: many(inventories),
-  loggedData: many(loggedData),
-}));
-
-export const simulationRawDataRelations = relations(simulationRawData, ({ one }) => ({
-  simulationRun: one(simulationRuns, {
-    fields: [simulationRawData.simulationRunId],
-    references: [simulationRuns.id],
+export const simulationRunsRelations = relations(
+  simulationRuns,
+  ({ one, many }) => ({
+    rawData: one(simulationRawData),
+    routeMetadata: one(routeMetadata),
+    tagConfiguration: one(tagConfigurations),
+    arming: one(armingRecords),
+    alarms: one(alarmRecords),
+    inventories: many(inventories),
+    loggedData: many(loggedData),
   }),
-}));
+);
+
+export const simulationRawDataRelations = relations(
+  simulationRawData,
+  ({ one }) => ({
+    simulationRun: one(simulationRuns, {
+      fields: [simulationRawData.simulationRunId],
+      references: [simulationRuns.id],
+    }),
+  }),
+);
 
 export const routeMetadataRelations = relations(routeMetadata, ({ one }) => ({
   simulationRun: one(simulationRuns, {
@@ -200,12 +239,15 @@ export const routeMetadataRelations = relations(routeMetadata, ({ one }) => ({
   }),
 }));
 
-export const tagConfigurationsRelations = relations(tagConfigurations, ({ one }) => ({
-  simulationRun: one(simulationRuns, {
-    fields: [tagConfigurations.simulationRunId],
-    references: [simulationRuns.id],
+export const tagConfigurationsRelations = relations(
+  tagConfigurations,
+  ({ one }) => ({
+    simulationRun: one(simulationRuns, {
+      fields: [tagConfigurations.simulationRunId],
+      references: [simulationRuns.id],
+    }),
   }),
-}));
+);
 
 export const armingRecordsRelations = relations(armingRecords, ({ one }) => ({
   simulationRun: one(simulationRuns, {
