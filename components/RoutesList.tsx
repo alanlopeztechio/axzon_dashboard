@@ -63,7 +63,7 @@ export function RoutesList({
   };
 
   return (
-    <div className="fixed bottom-4 left-20 z-30 w-80 max-h-[400px] bg-zinc-900/95 backdrop-blur-sm rounded-xl border border-zinc-800 overflow-hidden">
+    <div className="absolute bottom-4 left-20 z-30 w-80 max-h-[400px] bg-zinc-900/95 backdrop-blur-sm rounded-xl border border-zinc-800 overflow-hidden">
       {/* Header */}
       <button
         onClick={() => setExpanded(!expanded)}

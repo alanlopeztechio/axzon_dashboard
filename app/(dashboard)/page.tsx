@@ -4,13 +4,11 @@ import { useState, useCallback, useMemo } from 'react';
 import { APIProvider, Map } from '@vis.gl/react-google-maps';
 
 import { useSimulationData } from '@/hooks';
-import {
-  DeckGlOverlay,
-  LoadingOverlay,
-  RoutesList,
-  StatsPanel,
-  UserMenu,
-} from '@/components';
+import { DeckGlOverlay } from '@/components/DeckGlOverlay';
+import { LoadingOverlay } from '@/components/LoadingOverlay';
+import { RoutesList } from '@/components/RoutesList';
+import { StatsPanel } from '@/components/StatsPanel';
+import { UserMenu } from '@/components/UserMenu';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -104,7 +102,7 @@ export default function Home() {
           {/* <Timeline lastUpdate={lastUpdate ?? undefined} /> */}
 
           {/* User menu */}
-          <UserMenu />
+          {/* <UserMenu /> */}
         </div>
       </main>
 

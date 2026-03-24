@@ -61,7 +61,7 @@ export function StatsPanel({
   avgTemp,
 }: StatsPanelProps) {
   return (
-    <div className="fixed top-10 left-10 z-30 flex flex-col gap-3">
+    <div className="absolute top-10 left-10 z-30 flex flex-col gap-3">
       <StatCard
         icon={<Truck className="w-5 h-5" />}
         label="Active Routes"
