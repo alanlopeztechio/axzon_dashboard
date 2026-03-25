@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { LogOut } from 'lucide-react';
+import { LogOut, Moon, Sun } from 'lucide-react';
 import type { User } from '@supabase/supabase-js';
 import { createClient } from '@/lib/supabase/client';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
@@ -18,6 +18,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu';
+import { Button } from './ui/button';
+import { useTheme } from 'next-themes';
 
 export function UserMenu() {
   const [user, setUser] = useState<User | null>(null);
@@ -43,7 +45,7 @@ export function UserMenu() {
 
   const email = user?.email ?? '';
   const initials = email ? email[0].toUpperCase() : '?';
-
+  const { setTheme } = useTheme();
   return (
     <SidebarGroup>
       <SidebarMenu>
@@ -103,6 +105,26 @@ export function UserMenu() {
                     Cerrar sesión
                   </button>
                 </form>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" size="sm">
+                <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
+                <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
+                <span className="sr-only">Toggle theme</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem onClick={() => setTheme('light')}>
+                Light
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme('dark')}>
+                Dark
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => setTheme('system')}>
+                System
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

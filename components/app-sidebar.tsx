@@ -27,6 +27,7 @@ import {
   GitBranchPlusIcon,
   LayoutGrid,
   MapIcon,
+  MapPinHouse,
   Route,
   Truck,
   Zap,
@@ -50,7 +51,6 @@ const data = {
     },
     {
       title: 'Logistics',
-      url: '#',
       items: [
         {
           title: 'Logistics Overview',
@@ -77,89 +77,25 @@ const data = {
           url: '#',
           icon: Route,
         },
-        {
-          title: 'Optimizing',
-          url: '#',
-        },
-        {
-          title: 'Configuring',
-          url: '#',
-        },
-        {
-          title: 'Testing',
-          url: '#',
-        },
-        {
-          title: 'Authentication',
-          url: '#',
-        },
-        {
-          title: 'Deploying',
-          url: '#',
-        },
-        {
-          title: 'Upgrading',
-          url: '#',
-        },
-        {
-          title: 'Examples',
-          url: '#',
-        },
       ],
     },
     {
-      title: 'API Reference',
-      url: '#',
+      title: 'Infraestructure',
       items: [
         {
-          title: 'Components',
+          title: 'Warehouses',
           url: '#',
+          icon: MapPinHouse,
         },
         {
-          title: 'File Conventions',
+          title: 'Readers',
           url: '#',
+          icon: MapPinHouse,
         },
         {
-          title: 'Functions',
+          title: 'Programming Station',
           url: '#',
-        },
-        {
-          title: 'next.config.js Options',
-          url: '#',
-        },
-        {
-          title: 'CLI',
-          url: '#',
-        },
-        {
-          title: 'Edge Runtime',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Architecture',
-      url: '#',
-      items: [
-        {
-          title: 'Accessibility',
-          url: '#',
-        },
-        {
-          title: 'Fast Refresh',
-          url: '#',
-        },
-        {
-          title: 'Next.js Compiler',
-          url: '#',
-        },
-        {
-          title: 'Supported Browsers',
-          url: '#',
-        },
-        {
-          title: 'Turbopack',
-          url: '#',
+          icon: MapPinHouse,
         },
       ],
     },
@@ -172,7 +108,7 @@ export function AppSidebar({
 }: React.ComponentProps<typeof Sidebar> & { pathname: string }) {
   return (
     <Sidebar {...props}>
-      <SidebarHeader className="border-b border-[#1e1e1e] px-3 py-4">
+      <SidebarHeader className="border-b px-3 py-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
@@ -181,7 +117,7 @@ export function AppSidebar({
                   <Zap className="size-5 text-[#c0392b]" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-bold text-base text-white tracking-widest">
+                  <span className="font-bold text-base tracking-widest">
                     AXZON
                   </span>
                   <span className="text-[10px] text-[#c0392b] tracking-[0.12em] font-medium">
