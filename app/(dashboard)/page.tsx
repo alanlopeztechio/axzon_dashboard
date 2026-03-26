@@ -9,7 +9,15 @@ import { LoadingOverlay } from '@/components/LoadingOverlay';
 import { RoutesList } from '@/components/RoutesList';
 import { StatsPanel } from '@/components/StatsPanel';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Area, AreaChart, ResponsiveContainer, Tooltip } from 'recharts';
+import {
+  Area,
+  AreaChart,
+  Cell,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from 'recharts';
 import {
   AlertTriangle,
   MapIcon,
@@ -29,6 +37,11 @@ const data = [
   { v: 64 },
   { v: 65 },
   { v: 64 },
+];
+
+const donutData = [
+  { name: 'Issue', value: 3200, color: '#ef2c2c' },
+  { name: 'Healthy', value: 19801, color: '#16c79a' },
 ];
 
 export default function Home() {
@@ -410,7 +423,65 @@ export default function Home() {
             </CardContent>
           </Card>
         </div>
+        <div className="flex flex-col px-4 py-6 gap-6 border mx-4 mb-4 rounded-2xl bg-card shadow-lg">
+          <h2 className="text-center text-2xl font-bold">Systemic Health</h2>
+          <div className="mx-auto w-full">
+            <div className="relative mx-auto h-58 w-58">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={[{ value: 1 }]}
+                    dataKey="value"
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={90}
+                    outerRadius={112}
+                    startAngle={0}
+                    endAngle={360}
+                    cornerRadius={0}
+                    stroke="none"
+                  >
+                    <Cell fill="#00C49F" />
+                  </Pie>
+                  <Pie
+                    data={donutData}
+                    dataKey="value"
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={90} // ← igual que el verde
+                    outerRadius={112} // ← igual que el verde
+                    startAngle={210}
+                    endAngle={-150}
+                    stroke="none"
+                    style={{ zIndex: 10 }}
+                  >
+                    {donutData.map((entry) => (
+                      <Cell key={entry.name} fill={entry.color} />
+                    ))}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
 
+              <div className="pointer-events-none w-full absolute inset-0 flex items-center justify-center">
+                <div className="text-center">
+                  <p className="text-5xl font-bold leading-none">23001</p>
+                  <p className="mt-2 text-2xl font-light">Total</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 flex w-full flex-row justify-between ">
+              <p className="text-green-500 font-bold text-xl">
+                <span className="mr-3 inline-block h-3 w-3 rounded-full bg-green-400 align-middle" />
+                18001 Validated
+              </p>
+              <p className="text-red-900 font-bold text-xl">
+                <span className="mr-3 inline-block h-3 w-3 animate-pulse rounded-full bg-red-900 align-middle shadow-[0_0_0_4px_rgba(127,29,29,0.18)]" />
+                5000 Anomalous
+              </p>
+            </div>
+          </div>
+        </div>
         {/* Map Container */}
         <div className="relative w-full h-full">
           <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}>

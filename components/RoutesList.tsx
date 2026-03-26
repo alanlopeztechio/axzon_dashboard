@@ -63,7 +63,7 @@ export function RoutesList({
   };
 
   return (
-    <div className="absolute bottom-4 left-20 z-30 w-80 max-h-[400px] bg-zinc-900/95 backdrop-blur-sm rounded-xl border border-zinc-800 overflow-hidden">
+    <div className="absolute bottom- left-2 right-2 z-30 w-auto max-h-100 overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/95 backdrop-blur-sm sm:bottom-4 sm:left-4 sm:right-4 md:left-20 md:right-auto md:w-80">
       {/* Header */}
       <button
         onClick={() => setExpanded(!expanded)}
@@ -85,7 +85,7 @@ export function RoutesList({
 
       {/* Routes List */}
       {expanded && (
-        <div className="overflow-y-auto max-h-[320px] divide-y divide-zinc-800/50">
+        <div className="max-h-80 overflow-y-auto divide-y divide-zinc-800/50">
           {routeStats.map((route) => (
             <div
               key={route.id}
@@ -99,7 +99,7 @@ export function RoutesList({
               onMouseLeave={() => onRouteHover?.(null)}
             >
               <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-white truncate max-w-[180px]">
+                <span className="min-w-0 flex-1 truncate pr-2 text-sm font-medium text-white">
                   {route.routeName}
                 </span>
                 {route.anomalies > 0 && (
