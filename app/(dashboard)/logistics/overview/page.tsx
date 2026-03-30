@@ -1,3 +1,4 @@
+import { Wrapped2 } from '@/components/Skeleton';
 import { ChartBar, ChartBarBig, RouteIcon, Truck } from 'lucide-react';
 
 const page = () => {
@@ -55,6 +56,7 @@ const page = () => {
               </p>
             </div>
           </div>
+          <Wrapped2 />
         </div>
       </div>
     </div>

@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { MapPin, MessageCircleIcon, Phone } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
+import TimeLine from './TimeLine';
+import RouteIndicator from './TimeLine';
+import TrailerGrid from './TrailerGrid';
 
 interface CardRouteProps {
   route: RouteOption;
@@ -19,7 +22,7 @@ const CardRoute: FC<CardRouteProps> = ({ route, onSelect, isSelected }) => {
       className={`mb-4 rounded-3xl border px-2 py-6 text-left transition-all last:mb-0 ${
         isSelected
           ? 'border-red-950 hover:border-red-950'
-          : 'border-transparent hover:border-red-950/50'
+          : 'hover:border-red-950/50'
       }`}
     >
       <CardHeader>
@@ -32,19 +35,20 @@ const CardRoute: FC<CardRouteProps> = ({ route, onSelect, isSelected }) => {
             <p className="font-extralight text-sm">{route.product}</p>
           </div>
 
-          <div className="relative h-20 w-20 overflow-hidden">
+          {/* <div className="relative h-20 w-20 overflow-hidden">
             <Image
               src="/flete.png"
               alt="Shipment Image"
               fill
               className="object-contain"
             />
-          </div>
+          </div> */}
         </div>
       </CardHeader>
 
       <CardContent>
-        <div className="relative mt-6 space-y-5 pl-11">
+        <RouteIndicator />
+        {/* <div className="relative mt-6 space-y-5 pl-11">
           <span className="absolute left-4.25 top-8 h-11 w-px border-l border-dashed border-emerald-300" />
 
           <div className="relative">
@@ -58,6 +62,13 @@ const CardRoute: FC<CardRouteProps> = ({ route, onSelect, isSelected }) => {
           </div>
 
           <div className="relative">
+            <span className="absolute -left-11 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-orange-100/80">
+              <span className="h-3 w-3 rounded-full bg-orange-400" />
+            </span>
+            <p>Hola Mundo</p>
+          </div>
+
+          <div className="relative">
             <span className="absolute -left-11 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-blue-100">
               <MapPin className="text-blue-500" />
             </span>
@@ -66,12 +77,11 @@ const CardRoute: FC<CardRouteProps> = ({ route, onSelect, isSelected }) => {
             </p>
             <p className="mt-1 text-sm text-slate-400">{route.destination}</p>
           </div>
-        </div>
+        </div> */}
       </CardContent>
 
-      {/* <hr className="my-6 border-t-2 border-gray-100 rounded-2xl w-full" /> */}
       <CardFooter className="bg-transparent border-transparent mb-2">
-        <div className="flex flex-row justify-between items-center w-full">
+        {/* <div className="flex flex-row justify-between items-center w-full">
           <div className="flex flex-row gap-4 justify-start items-center">
             <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full">
               <Avatar className="h-full w-full">
@@ -95,7 +105,8 @@ const CardRoute: FC<CardRouteProps> = ({ route, onSelect, isSelected }) => {
               <MessageCircleIcon className="text-blue-600" />
             </div>
           </div>
-        </div>
+        </div> */}
+        <TrailerGrid className="mx-auto w-full max-w-4xl" />
       </CardFooter>
     </Card>
   );

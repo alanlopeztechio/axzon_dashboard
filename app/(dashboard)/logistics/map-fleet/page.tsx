@@ -230,7 +230,7 @@ const MapPage = () => {
       <div className="flex h-full min-h-0 w-full max-w-140 flex-col px-4 py-6 sm:px-6 lg:px-8">
         <div className="shrink-0 px-3 py-3">
           <SeachForm />
-          <Tabs defaultValue="overview" className="py-4">
+          <Tabs defaultValue="overview" className="pt-4">
             <TabsList
               variant="line"
               className="grid w-full grid-cols-4 bg-transparent border-b rounded-none h-auto"
