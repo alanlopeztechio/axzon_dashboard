@@ -11,16 +11,19 @@ import { PulsingRadarLayer } from '../layers/PulsingRadarLayer';
 import { useSimulationData } from '../hooks/useSimulationData';
 import { useMapAnimations } from '../hooks/useAnimations';
 import { getColorFromText } from '../utils/colors';
+import { useData } from './providers/DataProvider';
 
 interface DeckGlOverlayProps {
-  onLoadingChange: (loading: boolean) => void;
-  onLoadingMessageChange: (message: string) => void;
+  // onLoadingChange: (loading: boolean) => void;
+  // onLoadingMessageChange: (message: string) => void;
 }
 
-function DeckGlOverlayComponent({
-  onLoadingChange,
-  onLoadingMessageChange,
-}: DeckGlOverlayProps) {
+function DeckGlOverlayComponent(
+  {
+    // onLoadingChange,
+    // onLoadingMessageChange,
+  }: DeckGlOverlayProps,
+) {
   const map = useMap('main-map');
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
@@ -29,10 +32,12 @@ function DeckGlOverlayComponent({
     [],
   );
 
-  const { data: simulationData } = useSimulationData({
-    onLoadingChange,
-    onLoadingMessageChange,
-  });
+  const simulationData = useData();
+
+  // const { data: simulationData } = useSimulationData({
+  //   onLoadingChange,
+  //   onLoadingMessageChange,
+  // });
 
   const { time, hoverScale } = useMapAnimations(hoveredId);
 

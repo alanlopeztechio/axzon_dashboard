@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/collapsible';
 import { UserMenu } from './UserMenu';
 import {
+  BoxIcon,
   ChevronRight,
   GitBranchPlusIcon,
   LayoutGrid,
@@ -62,6 +63,11 @@ const data: { navMain: NavGroup[] } = {
           title: 'Logistics Overview',
           url: '/logistics/overview',
           icon: Truck,
+        },
+        {
+          title: 'Shipments',
+          url: '/logistics/shipments',
+          icon: BoxIcon,
         },
         {
           title: 'Carriers',

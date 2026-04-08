@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { headers } from 'next/headers';
+import { unstable_cache } from 'next/cache';
 import { createClient } from '@/lib/supabase/server';
 import {
   SidebarInset,
@@ -8,6 +9,13 @@ import {
 } from '@/components/ui/sidebar';
 import { AppSidebar } from '@/components/app-sidebar';
 import { Separator } from '@/components/ui/separator';
+import { DataProvider } from '@/components/providers/DataProvider';
+import { SimulationPayload, SimulationRawJson } from '@/types/simulation';
+import { NextResponse } from 'next/dist/server/web/spec-extension/response';
+import { db } from '@/lib/db';
+import { Suspense } from 'react';
+import DashboardSkeleton from '@/components/DashboardSkeleton';
+import { DashboardDataBoundary } from '@/components/providers/DashboardDataBoundary';
 
 export default async function DashboardLayout({
   children,
@@ -35,7 +43,9 @@ export default async function DashboardLayout({
             className="mr-2 data-[orientation=vertical]:h-4"
           />
         </header>
-        {children}
+        <Suspense fallback={<DashboardSkeleton />}>
+          <DashboardDataBoundary>{children}</DashboardDataBoundary>
+        </Suspense>
       </SidebarInset>
     </SidebarProvider>
   );

@@ -25,6 +25,7 @@ import {
   ShieldCheck,
   Thermometer,
 } from 'lucide-react';
+import { useData } from '@/components/providers/DataProvider';
 
 const data = [
   { v: 62 },
@@ -48,26 +49,24 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState('Cargando mapa...');
   const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
+  const simulationData = useData();
 
-  // Memoizar callbacks para evitar re-renders
-  const handleLoadingChange = useCallback((loading: boolean) => {
-    setIsLoading(loading);
-    if (!loading) {
-      setLastUpdate(new Date());
-    }
-  }, []);
+  // const handleLoadingChange = useCallback((loading: boolean) => {
+  //   setIsLoading(loading);
+  //   if (!loading) {
+  //     setLastUpdate(new Date());
+  //   }
+  // }, []);
 
   const handleLoadingMessageChange = useCallback((message: string) => {
     setLoadingMessage(message);
   }, []);
 
-  // Cargar datos de simulación
-  const { data: simulationData } = useSimulationData({
-    onLoadingChange: handleLoadingChange,
-    onLoadingMessageChange: handleLoadingMessageChange,
-  });
+  // const { data: simulationData } = useSimulationData({
+  //   onLoadingChange: handleLoadingChange,
+  //   onLoadingMessageChange: handleLoadingMessageChange,
+  // });
 
-  // Calcular estadísticas
   const stats = useMemo(() => {
     const temps = simulationData.points
       .filter((p) => p.tempInC !== null)
@@ -494,8 +493,7 @@ export default function Home() {
               disableDefaultUI={true}
             />
             <DeckGlOverlay
-              onLoadingChange={handleLoadingChange}
-              onLoadingMessageChange={handleLoadingMessageChange}
+            // onLoadingMessageChange={handleLoadingMessageChange}
             />
           </APIProvider>
 
@@ -526,7 +524,7 @@ export default function Home() {
           {/* <UserMenu /> */}
         </div>
       </main>
-      {isLoading && <LoadingOverlay message={loadingMessage} />}
+      {/* {isLoading && <LoadingOverlay message={loadingMessage} />} */}
     </div>
   );
 }
