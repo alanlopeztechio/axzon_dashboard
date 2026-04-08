@@ -198,7 +198,7 @@ const ShipmentDetailsPage = async ({ params }: ShipmentDetailsPageProps) => {
         </div>
       </header>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card>
           <CardContent className="flex flex-row items-center gap-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#103742] p-2">
